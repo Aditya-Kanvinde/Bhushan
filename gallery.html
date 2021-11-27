@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="./Css/gallery.css">
+</head>
+<body>
+    <p class="main-heading">Gallery</p>
+    <div class="container">
+    <div id="app">
+        <div v-if="res.length" class="masonry">
+            <div v-for="r in res">
+                <div v-if="r.fields.image.fields.file.contentType =='image/png' || r.fields.image.fields.file.contentType =='image/jpeg' ">
+                    <img v-lazy="r.fields.image.fields.file.url" height="100%" width="100%">
+                </div>
+                <div v-else>
+                    <video :src="r.fields.image.fields.file.url" :poster="r.fields.thumbnail.fields.file.url" controls height="100%" width="100%" class="lazy">
+                        
+                    </video>
+                </div>
+           
+            </div>
+        </div>
+        <div v-else> 
+            
+        </div>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script src="https://unpkg.com/vue-lazyload/vue-lazyload.js"></script>
+    <script src="./Scripts/vue.js"></script>
+</body>
+</html>
